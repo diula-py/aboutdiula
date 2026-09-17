@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiuLa！—與失物重逢的捷徑</title>
+  <meta name="description" content="DiuLa！—與失物重逢的捷徑。東西不見了別擔心，DiuLa！提供更省時、省力的協尋方式，陪你一起往失物的方向前進！">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== 導覽列 ===== -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <nav class="topbar-links" aria-label="主要選單">
+        <a href="#file/intro">介紹</a>
+        <a href="#file/features">功能</a>
+        <a href="#file/team">組員</a>
+        <a href="#expo">展覽</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+      <a href="#" class="logo"><img src="images/logo.png" alt="DiuLa!"></a>
+      <p class="topbar-tag">失物招領系統</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Banner：Logo + Slogan + 插圖 ===== -->
+    <section class="container hero">
+      <div class="hero-card">
+        <div class="hero-text">
+          <img class="hero-logo" src="images/logo.png" alt="DiuLa!">
+          <p class="hero-tagline">DiuLa！—與失物重逢的捷徑</p>
+          <p class="hero-slogan">東西不見了別擔心</p>
+          <p class="hero-sub">DiuLa！提供更省時、省力的協尋方式<br>陪你一起往失物的方向前進！</p>
+          <div class="hero-actions">
+            <a class="pill pill-dark js-diula-link" target="_blank" rel="noopener">前往 DiuLa! →</a>
+            <a class="pill" href="#file/features">看看功能</a>
+            <a class="pill" href="#file/team">認識我們</a>
+          </div>
+        </div>
+
+        <!-- 插圖；想換成照片的話，把整個 <svg> 換成 <img src="images/banner.jpg" alt="…"> -->
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 480 380">
+            <circle cx="250" cy="185" r="150" fill="#cddcf0"/>
+            <path class="trail" d="M60 320C130 280 110 190 190 175S330 130 395 215"/>
+
+            <!-- 定位圖釘 + 放大鏡 -->
+            <g class="float" style="--d: 0s">
+              <path fill="#492c13" d="M250 58c-47 0-82 35-82 80 0 41 49 106 74 139a10 10 0 0 0 16 0c25-33 74-98 74-139 0-45-35-80-82-80Z"/>
+              <circle cx="250" cy="134" r="30" fill="#f3f0e1"/>
+              <circle cx="246" cy="130" r="13" fill="none" stroke="#492c13" stroke-width="6"/>
+              <path d="M256 140l11 11" stroke="#492c13" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="250" cy="312" r="15" fill="#492c13"/>
+            </g>
+
+            <!-- 證件 -->
+            <g transform="translate(30 70) rotate(-8)">
+              <g class="float item" style="--d: -1s">
+                <rect width="124" height="80" rx="14" fill="#fffdf7"/>
+                <rect x="12" y="14" width="38" height="44" rx="8" fill="#1f2f4f" stroke="none"/>
+                <circle cx="31" cy="30" r="7" fill="#f3f0e1" stroke="none"/>
+                <path d="M19 52q12-16 24 0Z" fill="#f3f0e1" stroke="none"/>
+                <path d="M62 26h46M62 40h38M62 54h26" stroke="#1f2f4f" stroke-width="5"/>
+              </g>
+            </g>
+
+            <!-- 鑰匙 -->
+            <g transform="translate(372 58) rotate(24)">
+              <g class="float item" style="--d: -2s">
+                <circle r="22" fill="#fce6b7"/>
+                <circle r="7" fill="#f3f0e1"/>
+                <path d="M20-6h58a6 6 0 0 1 0 12H72v12h-9V6h-8v9h-9V6H20Z" fill="#fce6b7"/>
+              </g>
+            </g>
+
+            <!-- 錢包 -->
+            <g transform="translate(338 250) rotate(-6)">
+              <g class="float item" style="--d: -0.5s">
+                <rect width="112" height="78" rx="16" fill="#d7d4b1"/>
+                <path d="M16 0v-8a8 8 0 0 1 8-8h60a8 8 0 0 1 8 8v8" fill="none"/>
+                <rect x="62" y="24" width="60" height="30" rx="12" fill="#cddcf0"/>
+                <circle cx="82" cy="39" r="5" fill="#492c13" stroke="none"/>
+              </g>
+            </g>
+
+            <!-- 問號 -->
+            <g transform="translate(92 262)">
+              <g class="float item" style="--d: -3s">
+                <circle r="28" fill="#c72f02"/>
+                <text y="11" text-anchor="middle" font-size="32" font-weight="700" fill="#f3f0e1" stroke="none" font-family="Quicksand, sans-serif">?</text>
+              </g>
+            </g>
+
+            <!-- 小星星 -->
+            <path class="spark" d="M150 40v18M141 49h18M430 170v14M423 177h14M60 190v12M54 196h12"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 展覽資訊 ===== -->
+    <section class="container block" id="expo">
+      <div class="section-head">
+        <p class="crumbs">展覽資訊</p>
+        <h2 class="bar-title section-title">來現場找 DiuLa!</h2>
+      </div>
+      <div class="expo-grid">
+        <article class="ticket ticket-blue">
+          <div class="ticket-main">
+            <p class="ticket-tag">校內展</p>
+            <p class="ticket-date">10/13<span>–</span>10/15</p>
+            <p class="ticket-place">世新大學 管理學院一樓</p>
+          </div>
+          <div class="ticket-stub">
+            <span class="ticket-no">EXPO 01</span>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%96%E6%96%B0%E5%A4%A7%E5%AD%B8%E7%AE%A1%E7%90%86%E5%AD%B8%E9%99%A2" target="_blank" rel="noopener">看地圖 →</a>
+          </div>
+        </article>
+        <article class="ticket ticket-yellow">
+          <div class="ticket-main">
+            <p class="ticket-tag">校外展</p>
+            <p class="ticket-date">12/04<span>–</span>12/06</p>
+            <p class="ticket-place">松山文創園區 一號倉庫</p>
+          </div>
+          <div class="ticket-stub">
+            <span class="ticket-no">EXPO 02</span>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E5%B1%B1%E6%96%87%E5%89%B5%E5%9C%92%E5%8D%80" target="_blank" rel="noopener">看地圖 →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 文件夾總覽 ===== -->
+    <section class="archive">
+      <div class="container section-head archive-head">
+        <p class="crumbs">DiuLa! 檔案室</p>
+        <h1 class="bar-title section-title">關於 DiuLa!</h1>
+        <p class="archive-hint">把滑鼠移到文件夾上預覽，點一下打開檔案。</p>
+      </div>
+
+      <!-- 文件夾由 script.js 依資料產生 -->
+      <div class="cabinet" id="cabinet"></div>
+    </section>
+    <!-- ===== 贊助商 ===== -->
+    <section class="container block" id="sponsors">
+      <div class="section-head">
+        <p class="crumbs">贊助商</p>
+        <h2 class="bar-title section-title">謝謝支持我們的夥伴</h2>
+      </div>
+      <ul class="sponsor-grid">
+        <li class="sponsor"><img src="images/sponsors/fizzy-club.png" alt="FIZZY CLUB"></li>
+        <li class="sponsor"><img src="images/sponsors/chuikun.png" alt="垂坤"></li>
+        <li class="sponsor"><img src="images/sponsors/rubys.png" alt="Ruby's"></li>
+        <li class="sponsor"><img src="images/sponsors/the-vegan.png" alt="樂維根 THE VEGAN"></li>
+        <li class="sponsor"><img src="images/sponsors/being-music.png" alt="存在音樂 Being Music"></li>
+        <li class="sponsor"><img src="images/sponsors/being-cafe.png" alt="聲島咖啡 Being Café"></li>
+        <li class="sponsor sponsor-dark"><img src="images/sponsors/receipt-camera.png" alt="收據拍貼機 Receipt Camera"></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ===== Footer：聯絡資訊 ===== -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="DiuLa!">
+        <p>DiuLa！—與失物重逢的捷徑</p>
+        <a class="pill pill-dark js-diula-link" target="_blank" rel="noopener">前往 DiuLa! →</a>
+      </div>
+
+      <div class="footer-contact">
+        <h2 class="bar-title footer-title">聯絡我們</h2>
+        <ul class="footer-links">
+          <li>
+            <a href="https://www.instagram.com/diula_112ics/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor"/></svg>
+              <span>Instagram</span><span class="handle">@diula_112ics</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.threads.net/@diula_112ics" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 12.2c0-2.3-1.4-3.6-3.3-3.6-1.9 0-3.2 1.3-3.2 3.1 0 1.7 1.2 2.9 2.9 2.9 2.4 0 3.6-1.9 3.6-4.6 0-4-2.6-6-5.8-6C6.3 4 4 6.9 4 12s2.4 8 6.2 8c2.6 0 4.2-.9 5.3-2.3"/><path d="M15.5 12.2c0 3 1.1 4.1 2.3 4.1 1.3 0 2.2-1.4 2.2-4.3"/></svg>
+              <span>Threads</span><span class="handle">@diula_112ics</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:diula112ics@gmail.com">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+              <span>Email</span><span class="handle">diula112ics@gmail.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container"><p class="footer-copy">© <span id="year"></span> DiuLa! 團隊</p></div>
+  </footer>
+
+  <!-- ===== 打開後的檔案頁，由 script.js 產生內容 ===== -->
+  <div class="dossier" id="dossier" role="dialog" aria-modal="true" aria-labelledby="dossier-title" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
