@@ -7,7 +7,7 @@
    ========================================================= */
 
 // TODO：DiuLa! 的網址；還沒有的話留空，按鈕會顯示「即將上線」
-const DIULA_URL = '';
+const DIULA_URL = 'https://diula-py.github.io/diula-outter/#/';
 
 // 組員：照片放進 images/team/，再把檔名填到 photo，例如 photo: 'images/team/卓筱婷.jpg'
 const TEAM = [
