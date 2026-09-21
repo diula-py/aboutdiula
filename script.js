@@ -19,12 +19,6 @@ const TEAM = [
   { role: 'DEVELOPER', name: '謝旻', photo: '' },
 ];
 
-// 功能頁的使用流程入口，點了打開對應的流程檔案
-const FEATURE_GROUPS = [
-  { title: '尋找遺失物', ids: ['flow-cross', 'flow-threads'] },
-  { title: '登錄拾獲物', ids: ['flow-found'] },
-];
-
 // App 首頁示意圖上的四大入口
 const APP_HOME = [
   { title: '尋找遺失物', items: [['search', '跨平台尋找遺失物'], ['threads', 'Threads 尋找遺失物']] },
@@ -32,16 +26,17 @@ const APP_HOME = [
 ];
 
 // 首頁「DiuLa! 功能」的重點功能：<em> 包住的字會放大變紅；<wbr> 是可以換行的位置；desc 是選填的一行說明（建議 20 字內）
+// note 是點開後便條上的內容，可以放多段：note: ['第一段', '第二段']（TODO：補上內容）
 const POINTS = [
-  { icon: 'multi', title: '一鍵查詢<em>四大</em><wbr>遺失物平台', desc: '' },
-  { icon: 'web', title: '免下載<wbr>隨開隨用', desc: '' },
-  { icon: 'cards', title: '圖文卡片<wbr>一目瞭然', desc: '' },
-  { icon: 'ai', title: '<em>AI</em>遺失物<wbr>自動分類', desc: '' },
-  { icon: 'bell', title: '<em>5</em>日持續追蹤<wbr>與通知', desc: '' },
-  { icon: 'steps', title: '<em>3</em>步快速通報', desc: '' },
-  { icon: 'mask', title: '證件個資<wbr>自動遮蔽', desc: '' },
-  { icon: 'share', title: '官方代發<wbr>社群擴散', desc: '' },
-  { icon: 'postsearch', title: '社群貼文<wbr>精準搜', desc: '' },
+  { icon: 'multi', title: '一鍵查詢<em>四大</em><wbr>遺失物平台', desc: '', note: [] },
+  { icon: 'web', title: '免下載<wbr>隨開隨用', desc: '', note: [] },
+  { icon: 'cards', title: '圖文卡片<wbr>一目瞭然', desc: '', note: [] },
+  { icon: 'ai', title: '<em>AI</em>遺失物<wbr>自動分類', desc: '', note: [] },
+  { icon: 'bell', title: '<em>5</em>日持續追蹤<wbr>與通知', desc: '', note: [] },
+  { icon: 'steps', title: '<em>3</em>步快速通報', desc: '', note: [] },
+  { icon: 'mask', title: '證件個資<wbr>自動遮蔽', desc: '', note: [] },
+  { icon: 'share', title: '官方代發<wbr>社群擴散', desc: '', note: [] },
+  { icon: 'postsearch', title: '社群貼文<wbr>精準搜', desc: '', note: [] },
 ];
 
 // 功能畫面：mock: 'home' 是用網頁重現的 App 首頁；
@@ -283,28 +278,22 @@ const screensHTML = () => `<div class="screens">${SCREENS.map((sc) => `
     <figcaption>${sc.caption}</figcaption>
   </figure>`).join('')}</div>`;
 
-const pointsHTML = () => `<ol class="points">${POINTS.map((p) => `
-  <li class="point">
-    <span class="point-icon">${icon(p.icon)}</span>
-    <div>
-      <h3>${p.title}</h3>
-      ${p.desc ? `<p>${p.desc}</p>` : ''}
-    </div>
+const pointsHTML = () => `<ol class="points">${POINTS.map((p, i) => `
+  <li>
+    <button class="point" data-point="${i}" aria-haspopup="dialog">
+      <span class="point-icon">${icon(p.icon)}</span>
+      <span class="point-text">
+        <span class="point-title">${p.title}</span>
+        ${p.desc ? `<p>${p.desc}</p>` : ''}
+      </span>
+    </button>
   </li>`).join('')}</ol>`;
 
 
 function extraHTML(f) {
   switch (f.extra) {
     case 'features':
-      return screensHTML() + pointsHTML() +
-        `<h4 class="sub-head">使用流程</h4>` +
-        FEATURE_GROUPS.map((g) => `
-        <h4 class="bar-title mini-title">${g.title}</h4>
-        <div class="app-pills">${g.ids.map((id) => `
-          <button class="app-pill" data-open="${id}">
-            ${icon(FILES[id].icon)}<span>${FILES[id].title}</span>
-          </button>`).join('')}
-        </div>`).join('');
+      return screensHTML() + pointsHTML();
     case 'flow':
       return `<ol class="flow">${f.steps
         .map(([title, desc]) => `<li><span><strong>${title}</strong>${desc}</span></li>`)
@@ -431,13 +420,42 @@ dossier.addEventListener('click', (e) => {
     closeFile();
     return;
   }
+  const point = e.target.closest('[data-point]');
+  if (point) { openMemo(Number(point.dataset.point)); return; }
   const target = e.target.closest('[data-open]');
   if (target) openFile(target.dataset.open);
 });
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !dossier.hidden) closeFile();
+  // 便條開著時，Esc 只關便條
+  if (e.key === 'Escape' && !dossier.hidden && !memo.open) closeFile();
 });
+
+/* ----- 重點功能的便條小視窗 ----- */
+const memo = document.getElementById('memo');
+
+function openMemo(i) {
+  const p = POINTS[i];
+  const note = p.note.length ? p.note : ['內容整理中，之後補上。'];
+  memo.innerHTML = `
+    <div class="memo-paper">
+      <span class="memo-tape" aria-hidden="true"></span>
+      <button class="memo-close" data-memo-close aria-label="關閉">✕</button>
+      <p class="memo-no">MEMO / ${String(i + 1).padStart(2, '0')}</p>
+      <div class="memo-head">
+        <span class="point-icon">${icon(p.icon)}</span>
+        <h3 id="memo-title">${p.title}</h3>
+      </div>
+      <div class="memo-body">${note.map((t) => `<p>${t}</p>`).join('')}</div>
+    </div>`;
+  memo.showModal();
+}
+
+memo.addEventListener('click', (e) => {
+  // 點便條外面的背景，或按 ✕ 都會關閉
+  if (e.target === memo || e.target.closest('[data-memo-close]')) memo.close();
+});
+memo.addEventListener('close', () => { memo.innerHTML = ''; });
 
 // 「前往 DiuLa!」按鈕
 document.querySelectorAll('.js-diula-link').forEach((link) => {

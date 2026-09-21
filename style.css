@@ -246,13 +246,6 @@ button { font: inherit; }
 .sheet-wide .side-note { display: none; }
 .sheet-main { container-type: inline-size; }
 
-.sub-head {
-  margin: 48px 0 0;
-  padding-top: 28px;
-  border-top: 1px dashed rgba(73, 44, 19, 0.35);
-  font-size: 1.1rem;
-}
-
 /* 手機畫面 */
 .screens {
   display: flex;
@@ -362,9 +355,11 @@ button { font: inherit; }
   gap: 20px;
   counter-reset: point;
 }
+.points > li { display: flex; }
 .point {
   counter-increment: point;
   position: relative;
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -372,9 +367,14 @@ button { font: inherit; }
   border: var(--stroke) solid var(--line);
   border-radius: 28px;
   background: var(--paper);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
   transition: transform 0.2s var(--ease), background 0.2s;
 }
-.point:hover { transform: translateY(-4px); background: var(--brand-yellow); }
+.point:hover, .point:focus-visible { transform: translateY(-4px); background: var(--brand-yellow); }
+.point:focus-visible { outline: 3px solid var(--brand-red); outline-offset: 3px; }
 .point::before {
   content: "0" counter(point);
   position: absolute;
@@ -395,7 +395,8 @@ button { font: inherit; }
   background: var(--brand-blue);
 }
 .point-icon .icon { width: 34px; height: 34px; }
-.point h3 {
+.point-title {
+  display: block;
   margin: 0;
   word-break: keep-all; /* 只在 <wbr> 的位置換行 */
   overflow-wrap: anywhere;
@@ -403,13 +404,13 @@ button { font: inherit; }
   font-weight: 700;
   line-height: 1.35;
 }
-.point h3 em {
+.point-title em {
   font-style: normal;
   font-family: var(--display);
   font-size: 1.3em;
   color: var(--brand-red);
 }
-.point p { margin: 6px 0 0; color: var(--muted); }
+.point-text p { margin: 6px 0 0; color: var(--muted); }
 
 @container (max-width: 820px) {
   .points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -417,7 +418,7 @@ button { font: inherit; }
 @container (max-width: 520px) {
   .points { grid-template-columns: 1fr; gap: 14px; }
   .point { padding: 22px 20px; }
-  .point h3 { font-size: 1.35rem; }
+  .point-title { font-size: 1.35rem; }
   .screens {
     justify-content: flex-start;
     overflow-x: auto;
@@ -1003,29 +1004,6 @@ img.photo { border: var(--stroke) solid var(--line); }
 }
 .member-card h4 { margin: 0; font-size: 1.25rem; letter-spacing: 0.04em; }
 
-/* 功能頁：跟 App 一樣的膠囊按鈕 */
-.mini-title {
-  margin: 28px 0 14px;
-  font-family: var(--sans);
-  font-size: 1.2rem;
-}
-.app-pills { display: grid; gap: 14px; max-width: 520px; }
-.app-pill {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  padding: 20px 36px;
-  border: var(--stroke) solid var(--line);
-  border-radius: 999px;
-  background: var(--brand-bg);
-  color: var(--brand-brown);
-  font-weight: 700;
-  font-size: 1.1rem;
-  text-align: left;
-  cursor: pointer;
-  transition: transform 0.2s var(--ease), background 0.2s;
-}
-.app-pill:hover { transform: translateX(6px); background: var(--brand-yellow); }
 .icon {
   flex: none;
   width: 34px;
@@ -1097,6 +1075,103 @@ img.photo { border: var(--stroke) solid var(--line); }
   font-size: 0.85rem;
 }
 
+/* ===== 重點功能的便條小視窗 ===== */
+.memo {
+  width: min(440px, calc(100vw - 40px));
+  max-width: none;
+  max-height: calc(100vh - 40px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-brown);
+  overflow: visible;
+}
+.memo::backdrop {
+  background: rgba(73, 44, 19, 0.35);
+  backdrop-filter: blur(2px);
+}
+.memo-paper {
+  position: relative;
+  isolation: isolate;
+  padding: 44px 32px 40px;
+  filter: drop-shadow(0 18px 30px rgba(73, 44, 19, 0.3));
+  transform: rotate(-1.5deg);
+}
+/* 便條紙；右下角折角（放在偽元素上，才不會把陰影和紙膠帶一起裁掉） */
+.memo-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(315deg, transparent 50%, #e6c886 50%) right bottom / 36px 36px no-repeat,
+    var(--noise),
+    var(--brand-yellow);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 36px), calc(100% - 36px) 100%, 0 100%);
+}
+.memo-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 120px;
+  height: 30px;
+  background: rgba(205, 220, 240, 0.85);
+  border-left: 2px dashed rgba(255, 255, 255, 0.6);
+  border-right: 2px dashed rgba(255, 255, 255, 0.6);
+  transform: translateX(-50%) rotate(3deg);
+}
+.memo-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: var(--stroke) solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.memo-close:hover, .memo-close:focus-visible { background: var(--brand-blue); }
+.memo-no {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--brand-red);
+}
+.memo-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.memo-head .point-icon { width: 56px; height: 56px; }
+.memo-head .point-icon .icon { width: 30px; height: 30px; }
+.memo-head h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.memo-head h3 em {
+  font-style: normal;
+  font-family: var(--display);
+  font-size: 1.3em;
+  color: var(--brand-red);
+}
+.memo-body {
+  min-height: 128px;
+  /* 橫線，跟文字的行高對齊 */
+  background: repeating-linear-gradient(transparent 0 31px, rgba(73, 44, 19, 0.16) 31px 32px);
+}
+.memo-body p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 32px; /* 對齊便條紙的橫線 */
+}
+
 /* ===== 動畫 ===== */
 @keyframes rise {
   from { opacity: 0; transform: translateY(32px); }
@@ -1115,6 +1190,12 @@ img.photo { border: var(--stroke) solid var(--line); }
   from { opacity: 0; transform: translateY(40px) rotate(-8deg); }
   to { opacity: 1; transform: rotate(1.5deg); }
 }
+
+@keyframes memo-in {
+  from { opacity: 0; transform: translateY(24px) rotate(-6deg) scale(0.95); }
+}
+.memo[open] .memo-paper { animation: memo-in 0.35s var(--ease) both; }
+.memo[open]::backdrop { animation: fade 0.25s both; }
 
 .dossier.play { animation: fade 0.25s both; }
 .dossier.play .dossier-head { animation: rise 0.5s var(--ease) both; }
@@ -1217,7 +1298,6 @@ img.photo { border: var(--stroke) solid var(--line); }
   .hero { padding-top: 20px; }
   .hero-card { grid-template-columns: 1fr; gap: 16px; padding: 32px 22px; border-radius: 28px; }
   .hero-art { max-width: 360px; margin: 0 auto; width: 100%; }
-  .app-pill { gap: 18px; padding: 16px 22px; font-size: 1rem; }
   .footer-contact { width: 100%; }
   .footer-links a { grid-template-columns: 22px auto; }
   .footer-links .handle { grid-column: 2; margin-top: -6px; }
