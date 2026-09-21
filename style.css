@@ -187,12 +187,23 @@ button { font: inherit; }
 .block .section-head { padding-left: 4%; }
 .pill.is-soon { opacity: 0.55; cursor: default; pointer-events: none; }
 
+/* 標題前的放大鏡圖示 */
 .bar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
   margin: 8px 0 0;
   font-family: var(--display);
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.15;
+}
+.bar-title::before {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.9em;
+  background: url("images/icon-search.png") center / contain no-repeat;
 }
 .section-title { font-size: clamp(2rem, 5vw, 3.2rem); }
 .archive-hint {
@@ -204,7 +215,7 @@ button { font: inherit; }
 
 /* ===== 功能檔案：大標題、手機畫面、重點功能 ===== */
 .dossier-title img { display: block; height: 0.95em; width: auto; }
-.dossier-title:has(img) { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.25em; }
+.dossier-title img { align-self: flex-end; }
 
 /* 寬版紙張：拿掉左側小字欄，內容加寬 */
 .panel.panel-wide { padding-left: 5%; }
