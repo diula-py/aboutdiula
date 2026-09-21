@@ -500,7 +500,8 @@ button { font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 96px;
+  --logo-h: 96px;
+  height: var(--logo-h);
   background: var(--bg); /* 讓白底 Logo 在滑鼠移過去時也能融進背景 */
   transition: transform 0.2s var(--ease);
 }
@@ -508,7 +509,7 @@ button { font: inherit; }
 .sponsor img {
   display: block;
   max-width: 100%;
-  max-height: 100%;
+  max-height: var(--logo-h); /* 用固定值，百分比在圖片剛載入時可能還算不出來，直式 Logo 會先顯示原尺寸 */
   object-fit: contain;
   mix-blend-mode: multiply; /* 讓白底的 Logo 融進米色背景 */
 }
@@ -1182,7 +1183,7 @@ img.photo { border: var(--stroke) solid var(--line); }
     overflow-x: auto;
     scroll-snap-type: x proximity;
   }
-  .sponsor { height: 80px; scroll-snap-align: start; }
+  .sponsor { --logo-h: 80px; scroll-snap-align: start; }
   .members { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .member-card h4 { font-size: 1.1rem; }
   .hero { padding-top: 20px; }
