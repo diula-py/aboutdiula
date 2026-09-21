@@ -1,3 +1,23 @@
+/* 源泉圓體（只含網頁用到的字；改文字後要重跑 fonts/subset-fonts.py） */
+@font-face {
+  font-family: "GenSenRounded";
+  src: url("fonts/GenSenRounded-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GenSenRounded";
+  src: url("fonts/GenSenRounded-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GenSenRounded";
+  src: url("fonts/GenSenRounded-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
 /* =========================================================
    配色設定（依 Diula 品牌視覺識別色票）
    ========================================================= */
@@ -38,9 +58,9 @@
   --stamp: var(--brand-red);
 
   /* 字體 */
-  --display: "Quicksand", "Noto Sans TC", system-ui, sans-serif;
-  --sans: "Noto Sans TC", system-ui, sans-serif;
-  --mono: "IBM Plex Mono", "Noto Sans TC", ui-monospace, monospace;
+  --display: "GenSenRounded", system-ui, sans-serif;
+  --sans: "GenSenRounded", system-ui, sans-serif;
+  --mono: "GenSenRounded", system-ui, sans-serif;
 
   /* 文件夾尺寸 */
   --tab-h: 44px;
