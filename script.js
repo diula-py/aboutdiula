@@ -2,7 +2,7 @@
    網站內容：改文字、加文件夾都在這裡
    - 每一列（row）是一層文件夾，第一個是主文件夾，後面最多兩個是同一層的小標籤
    - color 對應 style.css 裡的 --f-xxx 顏色：brown / blue / yellow / sage / red / navy
-   - extra 可放特殊內容：'features' | 'flow' | 'team'
+   - extra 可放特殊內容：'features' | 'flow'（搭配 steps）| 'team'
    - group 可指定麵包屑與登記單上的分類（預設是同一列的主文件夾）
    ========================================================= */
 
@@ -19,18 +19,16 @@ const TEAM = [
   { role: 'DEVELOPER', name: '謝旻', photo: '' },
 ];
 
-// 使用流程（TODO：依實際流程調整）
-const FLOW = [
-  ['登錄', '撿到東西的人，依證件類或非證件類登錄拾獲物。'],
-  ['整理', 'DiuLa! 把各平台的失物資訊整理在一起。'],
-  ['尋找', '失主跨平台搜尋，或從 Threads 貼文中找到自己的東西。'],
-  ['領回', '確認是自己的物品後，聯繫拾獲者領回。'],
+// 功能頁的使用流程入口，點了打開對應的流程檔案
+const FEATURE_GROUPS = [
+  { title: '尋找遺失物', ids: ['flow-cross', 'flow-threads'] },
+  { title: '登錄拾獲物', ids: ['flow-found'] },
 ];
 
-// 功能頁的分組，跟 App 首頁一樣
-const FEATURE_GROUPS = [
-  { title: '尋找遺失物', ids: ['cross', 'threads'] },
-  { title: '登錄拾獲物', ids: ['idcard', 'item'] },
+// App 首頁示意圖上的四大入口
+const APP_HOME = [
+  { title: '尋找遺失物', items: [['search', '跨平台尋找遺失物'], ['threads', 'Threads 尋找遺失物']] },
+  { title: '登錄拾獲物', items: [['idcard', '證件類遺失物登錄'], ['item', '非證件類遺失物登錄']] },
 ];
 
 // 首頁「DiuLa! 功能」的重點功能：<em> 包住的字會放大變紅；<wbr> 是可以換行的位置；desc 是選填的一行說明（建議 20 字內）
@@ -89,12 +87,6 @@ const ROWS = [
         '我們想做的不只是一張登記表，而是讓這些物品有機會回到主人身邊的一條路。',
       ],
     },
-    { id: 'mission', code: '01B', zh: '使命', en: 'Mission', color: 'yellow',
-      note: '我們為什麼存在。',
-      body: ['縮短物品從遺失到尋回的時間，讓失物招領變得簡單、透明。'] },
-    { id: 'vision', code: '01C', zh: '願景', en: 'Vision', color: 'blue',
-      note: '我們想走到哪裡。',
-      body: ['成為大家遺失物品時，第一個想到的地方。'] },
   ],
   [
     { id: 'features', code: '02A', zh: 'DiuLa! 功能', en: '一次看懂<wbr> 9 大重點功能', color: 'blue',
@@ -103,28 +95,42 @@ const ROWS = [
       note: '尋找遺失物、登錄拾獲物，一個地方搞定。',
       body: [],
       extra: 'features' },
-    { id: 'cross', code: '02B', zh: '跨平台尋找', en: 'Cross-platform', color: 'red', icon: 'search',
-      title: '跨平台尋找遺失物',
-      note: '功能檔案：一次搜尋多個平台。',
-      body: ['不用在各個社群之間來回翻找。DiuLa! 整合多個平台的失物資訊，一次搜尋就能看到。'] },
-    { id: 'threads', code: '02C', zh: 'Threads 尋找', en: 'Threads', color: 'yellow', icon: 'threads',
-      title: 'Threads 尋找遺失物',
-      note: '功能檔案：從 Threads 貼文找失物。',
-      body: ['很多人會在 Threads 上發文協尋失物。DiuLa! 幫你從這些貼文中，找出可能是你的東西。'] },
   ],
   [
-    { id: 'idcard', code: '03A', zh: '證件類登錄', en: 'ID items', color: 'yellow', icon: 'idcard', group: 'features',
-      title: '證件類遺失物登錄',
-      note: '功能檔案：撿到證件時登錄。',
-      body: ['撿到學生證、身分證、健保卡等證件時，可以在這裡登錄，讓失主更快找到。'] },
-    { id: 'item', code: '03B', zh: '非證件類登錄', en: 'Other items', color: 'sage', icon: 'item', group: 'features',
-      title: '非證件類遺失物登錄',
-      note: '功能檔案：撿到其他物品時登錄。',
-      body: ['撿到錢包、鑰匙、耳機、雨傘等物品時，拍照並填寫特徵與拾獲地點，完成登錄。'] },
-    { id: 'flow', code: '03C', zh: '使用流程', en: 'How it works', color: 'brown', group: 'features',
-      note: '從登錄到領回的四個步驟。',
-      body: ['從登錄到領回，只需要四個步驟。'],
-      extra: 'flow' },
+    // TODO：三個使用流程的步驟依實際操作調整
+    { id: 'flow-cross', code: '03A', zh: '跨平台尋物使用流程', en: 'Cross-platform search', color: 'red', icon: 'search', group: 'features',
+      title: '跨平台尋物使用流程',
+      note: '一次搜尋多個平台，找回遺失物。',
+      body: ['不用在各個社群之間來回翻找。DiuLa! 整合多個平台的失物資訊，一次搜尋就能看到。'],
+      extra: 'flow',
+      steps: [
+        ['輸入', '輸入遺失物的名稱、特徵或遺失地點。'],
+        ['搜尋', 'DiuLa! 同時搜尋多個遺失物平台。'],
+        ['比對', '從圖文卡片中找出可能是自己的東西。'],
+        ['領回', '確認是自己的物品後，依平台指示領回。'],
+      ] },
+    { id: 'flow-found', code: '03B', zh: '登錄拾獲物使用流程', en: 'Report found items', color: 'yellow', icon: 'item', group: 'features',
+      title: '登錄拾獲物使用流程',
+      note: '撿到東西時，幫它找到主人。',
+      body: ['撿到證件或其他物品時，在這裡登錄，讓失主更快找到。'],
+      extra: 'flow',
+      steps: [
+        ['選擇類別', '選擇證件類（學生證、身分證、健保卡等）或非證件類（錢包、鑰匙、耳機等）。'],
+        ['拍照填寫', '拍下物品照片，填寫特徵與拾獲地點。'],
+        ['完成登錄', '送出後，失主就能搜尋到這筆資料。'],
+        ['歸還', '失主確認後，聯繫領回。'],
+      ] },
+    { id: 'flow-threads', code: '03C', zh: 'Threads協尋使用流程', en: 'Threads search', color: 'sage', icon: 'threads', group: 'features',
+      title: 'Threads 協尋使用流程',
+      note: '從 Threads 貼文中找回失物。',
+      body: ['很多人會在 Threads 上發文協尋失物。DiuLa! 幫你從這些貼文中，找出可能是你的東西。'],
+      extra: 'flow',
+      steps: [
+        ['描述', '描述遺失物的名稱、特徵與遺失地點。'],
+        ['搜尋貼文', 'DiuLa! 從 Threads 貼文中找出相關的協尋與拾獲資訊。'],
+        ['比對', '查看符合的貼文，確認是不是自己的東西。'],
+        ['聯繫', '透過 Threads 聯繫發文者領回。'],
+      ] },
   ],
   [
     { id: 'team', code: '04A', zh: '組員介紹', en: 'Our team', color: 'navy',
@@ -253,9 +259,9 @@ let returnFocus = null;
 const homeMock = () => `
   <div class="screen screen-home">
     <div class="m-head"><img src="images/logo.png" alt=""></div>
-    ${FEATURE_GROUPS.map((g) => `
+    ${APP_HOME.map((g) => `
       <p class="m-title">${g.title}</p>
-      ${g.ids.map((id) => `<div class="m-pill">${icon(FILES[id].icon)}<span>${FILES[id].title}</span></div>`).join('')}
+      ${g.items.map(([ic, label]) => `<div class="m-pill">${icon(ic)}<span>${label}</span></div>`).join('')}
     `).join('')}
     <div class="m-nav"><span class="on">${icon('home')}</span><span>${icon('user')}</span></div>
   </div>`;
@@ -287,17 +293,16 @@ function extraHTML(f) {
   switch (f.extra) {
     case 'features':
       return screensHTML() + pointsHTML() +
-        `<h4 class="sub-head">App 首頁四大入口</h4>` +
+        `<h4 class="sub-head">使用流程</h4>` +
         FEATURE_GROUPS.map((g) => `
         <h4 class="bar-title mini-title">${g.title}</h4>
         <div class="app-pills">${g.ids.map((id) => `
           <button class="app-pill" data-open="${id}">
             ${icon(FILES[id].icon)}<span>${FILES[id].title}</span>
           </button>`).join('')}
-        </div>`).join('') +
-        `<p class="more-link"><button class="pill" data-open="flow">看使用流程 →</button></p>`;
+        </div>`).join('');
     case 'flow':
-      return `<ol class="flow">${FLOW
+      return `<ol class="flow">${f.steps
         .map(([title, desc]) => `<li><span><strong>${title}</strong>${desc}</span></li>`)
         .join('')}</ol>`;
     case 'team':
