@@ -83,7 +83,6 @@ const ROWS = [
         'DiuLa! 是一個跨平台的失物招領系統。我們想解決「東西掉了找不回來」這件小事。',
         '失物資訊常常散落在不同的社群和平台上。DiuLa! 把它們整理在一起，讓撿到東西的人和掉東西的人更容易找到彼此。',
       ],
-      excerptTitle: 'RESEARCH NOTE / 01',
       excerpt: [
         '每一件失物背後都有一段故事：一把陪了很久的鑰匙、一張剛辦好的學生證、一個重要的人送的小東西。',
         '我們想做的不只是一張登記表，而是讓這些物品有機會回到主人身邊的一條路。',
@@ -161,7 +160,10 @@ ROWS.forEach((row) => {
     FILES[f.id] = { ...DEFAULTS, ...f, groupId: f.group || (j === 0 ? null : row[0].id) };
   });
 });
-Object.values(FILES).forEach((f) => { f.group = f.groupId ? FILES[f.groupId] : null; });
+Object.values(FILES).forEach((f, i) => {
+  f.group = f.groupId ? FILES[f.groupId] : null;
+  f.noteNo = String(i + 1).padStart(2, '0'); // RESEARCH NOTE 編號，照檔案順序
+});
 const MAIN_FILES = ROWS.map((row) => FILES[row[0].id]);
 
 // 淺色文件夾用深色字
@@ -360,7 +362,7 @@ function renderFile(f) {
         </article>
 
         <article class="sheet-2">
-          <h3 class="en">${f.excerptTitle || `Excerpt ${f.code.slice(-1)}`}</h3>
+          <h3 class="en">RESEARCH NOTE / ${f.noteNo}</h3>
           <div class="columns">${f.excerpt.map((p) => `<p>${p}</p>`).join('')}</div>
           <div class="slip-wrap" aria-hidden="true">
             <div class="slip">

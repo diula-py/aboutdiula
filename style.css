@@ -840,9 +840,11 @@ button { font: inherit; }
   box-shadow: 0 18px 40px rgba(73, 44, 19, 0.15);
 }
 /* 標題和內文都避開右邊的登記單 */
+.sheet-2 { container-type: inline-size; }
 .sheet-2 > .en {
   max-width: calc(100% - 280px);
-  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  white-space: nowrap; /* 不換行，改用字級縮放塞進剩下的寬度 */
+  font-size: clamp(1.1rem, calc((100cqi - 280px) / 10.5), 2.8rem);
 }
 .columns {
   max-width: calc(100% - 280px);
@@ -1167,7 +1169,7 @@ img.photo { border: var(--stroke) solid var(--line); }
   .sheet-main { padding-top: 24px; }
 
   .sheet-2 { margin-right: 0; padding: 72px 20px 36px; }
-  .sheet-2 > .en { max-width: none; }
+  .sheet-2 > .en { max-width: none; font-size: clamp(1.1rem, calc(100cqi / 10.5), 2.8rem); }
   .columns { max-width: none; column-count: 1; }
   .slip-wrap {
     position: relative;
