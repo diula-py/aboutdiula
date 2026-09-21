@@ -142,12 +142,7 @@ button { font: inherit; }
 }
 .hero-logo { display: block; width: min(320px, 80%); height: auto; }
 .hero-tagline {
-  display: inline-block;
   margin: 24px 0 0;
-  padding: 4px 16px;
-  border: var(--stroke) solid var(--line);
-  border-radius: 999px;
-  background: var(--brand-bg);
   font-weight: 700;
 }
 .hero-slogan {
