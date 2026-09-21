@@ -192,11 +192,8 @@ button { font: inherit; }
 .block .section-head { padding-left: 4%; }
 .pill.is-soon { opacity: 0.55; cursor: default; pointer-events: none; }
 
-/* App 的「左側直線」標題 */
 .bar-title {
   margin: 8px 0 0;
-  padding-left: 18px;
-  border-left: 6px solid var(--brand-brown);
   font-family: var(--display);
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -496,6 +493,7 @@ button { font: inherit; }
   align-items: center;
   justify-content: center;
   height: 96px;
+  background: var(--bg); /* 讓白底 Logo 在滑鼠移過去時也能融進背景 */
   transition: transform 0.2s var(--ease);
 }
 .sponsor:hover { transform: translateY(-4px); }
@@ -668,8 +666,6 @@ button { font: inherit; }
 .dossier-title {
   margin: 0;
   font-size: clamp(2.8rem, 9vw, 6.5rem);
-  border-left-width: 10px;
-  padding-left: 24px;
 }
 .dossier-meta {
   flex: none;
@@ -974,8 +970,6 @@ img.photo { border: var(--stroke) solid var(--line); }
 /* 功能頁：跟 App 一樣的膠囊按鈕 */
 .mini-title {
   margin: 28px 0 14px;
-  padding-left: 12px;
-  border-left-width: 5px;
   font-family: var(--sans);
   font-size: 1.2rem;
 }
@@ -1027,7 +1021,7 @@ img.photo { border: var(--stroke) solid var(--line); }
 .footer-brand img { display: block; height: 48px; width: auto; }
 .footer-brand p { margin: 16px 0 20px; font-weight: 700; }
 .footer-brand .pill { display: inline-block; padding: 10px 24px; }
-.footer-title { margin: 0 0 18px; font-size: 1.3rem; padding-left: 12px; border-left-width: 5px; font-family: var(--sans); }
+.footer-title { margin: 0 0 18px; font-size: 1.3rem; font-family: var(--sans); }
 .footer-links {
   list-style: none;
   margin: 0;
