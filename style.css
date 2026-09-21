@@ -148,7 +148,7 @@ button { font: inherit; }
   font-weight: 700;
 }
 .hero-slogan {
-  margin: 16px 0 12px;
+  margin: 4px 0 12px;
   font-size: clamp(2rem, 4.2vw, 3rem);
   font-weight: 700;
   line-height: 1.25;
