@@ -160,6 +160,8 @@ Object.values(FILES).forEach((f, i) => {
   f.noteNo = String(i + 1).padStart(2, '0'); // RESEARCH NOTE 編號，照檔案順序
 });
 const MAIN_FILES = ROWS.map((row) => FILES[row[0].id]);
+// 側邊欄列出全部檔案，不只每一層的主文件夾
+const SIDE_FILES = ROWS.flat().map((f) => FILES[f.id]);
 
 // 淺色文件夾用深色字
 const LIGHT_COLORS = ['blue', 'yellow', 'sage', 'paper'];
@@ -316,7 +318,7 @@ function renderFile(f) {
   const crumbs = f.group
     ? `<a href="#file/${f.group.id}">${f.group.zh}</a> / 檔案 ${f.code}`
     : `檔案 ${f.code}`;
-  const others = MAIN_FILES.filter((x) => x.id !== f.id);
+  const others = SIDE_FILES.filter((x) => x.id !== f.id);
   const heading = f.icon ? `${icon(f.icon)}${f.title}` : f.en;
 
   dossier.setAttribute('style', colorVars(f) + paperVars(f));
