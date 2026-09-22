@@ -223,8 +223,9 @@ button { font: inherit; }
 .bar-title::before {
   content: "";
   flex: none;
-  width: 0.5em;
-  height: 0.9em;
+  /* 上限為原圖尺寸，放大才不會糊掉 */
+  width: min(0.5em, 30px);
+  height: min(0.9em, 54px);
   background: url("images/icon-search.png") center / contain no-repeat;
 }
 .section-title { font-size: clamp(2rem, 5vw, 3.2rem); }
@@ -695,7 +696,8 @@ button { font: inherit; }
 }
 .dossier-title {
   margin: 0;
-  font-size: clamp(2.8rem, 9vw, 6.5rem);
+  font-size: clamp(2rem, 5vw, 4rem);
+  word-break: keep-all;
 }
 .dossier-meta {
   flex: none;
