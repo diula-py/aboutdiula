@@ -534,7 +534,7 @@ button { font: inherit; }
   object-fit: contain;
   mix-blend-mode: multiply; /* 讓白底的 Logo 融進米色背景 */
 }
-.sponsor-dark img { mix-blend-mode: normal; border-radius: 10px; }
+.sponsor-dark img { mix-blend-mode: normal; }
 
 /* ===== 文件夾 ===== */
 .cabinet {
