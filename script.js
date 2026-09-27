@@ -28,15 +28,30 @@ const APP_HOME = [
 // 首頁「DiuLa! 功能」的重點功能：<em> 包住的字會放大變紅；<wbr> 是可以換行的位置；desc 是選填的一行說明（建議 20 字內）
 // note 是點開後便條上的內容，可以放多段：note: ['第一段', '第二段']（TODO：補上內容）
 const POINTS = [
-  { icon: 'multi', title: '一鍵查詢<em>四大</em><wbr>遺失物平台', desc: '', note: [] },
-  { icon: 'web', title: '免下載<wbr>隨開隨用', desc: '', note: [] },
-  { icon: 'cards', title: '圖文卡片<wbr>一目瞭然', desc: '', note: [] },
-  { icon: 'ai', title: '<em>AI</em>遺失物<wbr>自動分類', desc: '', note: [] },
-  { icon: 'bell', title: '<em>5</em>日持續追蹤<wbr>與通知', desc: '', note: [] },
-  { icon: 'steps', title: '<em>3</em>步快速通報', desc: '', note: [] },
-  { icon: 'mask', title: '證件個資<wbr>自動遮蔽', desc: '', note: [] },
-  { icon: 'share', title: '官方代發<wbr>社群擴散', desc: '', note: [] },
-  { icon: 'postsearch', title: '社群貼文<wbr>精準搜', desc: '', note: [] },
+  { icon: 'multi', title: '一鍵查詢<em>四大</em><wbr>遺失物平台', desc: '',
+    note: ['DiuLa! 整合警政署、捷運、高鐵與 Threads 遺失物資訊，一次搜尋多平台，不必再逐一搜網站、打客服。'] },
+  { icon: 'web', title: '免下載<wbr>隨開隨用', desc: '',
+    note: ['除了直接搜尋 DiuLa! 網站，也可透過 PWA 加入主畫面，或從 LINE 官方帳號進入 LIFF，免下載 App，快速查詢與通報。'] },
+  { icon: 'cards', title: '圖文資訊<wbr>快速掌握', desc: '',
+    note: ['將遺失物資訊整理成圖文卡片，物品照片、拾獲地點與時間清楚呈現，快速掌握資訊，找尋更直覺。'],
+    small: '註：遺失物照片依各平台來源顯示。' },
+  { icon: 'ai', title: '<em>AI</em>遺失物<wbr>自動分類', desc: '',
+    note: [
+      '上傳失物照片或輸入文字描述後，由 AI 自動辨識並分類物品標籤，減少輸入關鍵字與描述物品的困難。',
+      '無論來自哪個平台都用同一套分類，篩選一次就能精準縮小範圍。',
+    ] },
+  { icon: 'bell', title: '<em>5</em>日持續追蹤<wbr>與通知', desc: '',
+    note: ['現在沒找到不代表找不回來。設定追蹤後，DiuLa! 會在 5 日內持續比對新進的遺失物，有符合的失物資訊將即時通知你。'] },
+  { icon: 'steps', title: '<em>3</em>步快速<wbr>拾獲通報', desc: '',
+    note: ['撿到東西想物歸原主？只要拍照、選地點、送出，透過三個步驟即可完成拾獲物通報，快速留下失物資訊，增加失主尋回的機會。'] },
+  { icon: 'mask', title: '證件個資<wbr>自動打碼', desc: '',
+    note: ['拾獲證件時，系統自動遮蔽證件中的個人資訊，保留辨識失物所需的線索，同時降低個資外洩風險。'] },
+  { icon: 'share', title: '匿名代發<wbr>Threads 協尋', desc: '',
+    note: ['不用透過自己的帳號發文，DiuLa! 可將協尋資訊匿名發布至 DiuLa! 官方 Threads，擴大曝光範圍，同時保護個人帳號隱私，I 人也能安心協尋。'] },
+  { icon: 'postsearch', title: 'Threads<wbr>協尋文精準搜', desc: '',
+    note: ['從 Threads 協尋貼文中篩選相關資訊，縮小搜尋範圍，快速找到可能的失物線索。'] },
+  { icon: 'mycase', title: '我的案件<wbr>集中管理', desc: '',
+    note: ['「我的遺失物」與「我的拾獲物」集中管理曾經登錄的案件，查看目前狀態，也能刪除案件；若曾發布 Threads 協尋文，也可直接刪除貼文。'] },
 ];
 
 // 功能畫面：mock: 'home' 是用網頁重現的 App 首頁；
@@ -63,6 +78,7 @@ const ICONS = {
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
   threads: '<path d="M15.5 12.2c0-2.3-1.4-3.6-3.3-3.6-1.9 0-3.2 1.3-3.2 3.1 0 1.7 1.2 2.9 2.9 2.9 2.4 0 3.6-1.9 3.6-4.6 0-4-2.6-6-5.8-6C6.3 4 4 6.9 4 12s2.4 8 6.2 8c2.6 0 4.2-.9 5.3-2.3"/><path d="M15.5 12.2c0 3 1.1 4.1 2.3 4.1 1.3 0 2.2-1.4 2.2-4.3"/>',
   idcard: '<rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="currentColor"/><circle cx="8.5" cy="10.5" r="2" fill="#f3f0e1" stroke="none"/><path d="M5.5 16c.6-1.8 5.4-1.8 6 0" stroke="#f3f0e1"/><path d="M14 10h4.5M14 14h3" stroke="#f3f0e1"/>',
+  mycase: '<rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/>',
   item: '<rect x="5" y="4" width="14" height="17" rx="2.5" fill="currentColor"/><rect x="9" y="2.5" width="6" height="3.5" rx="1" fill="currentColor"/><path d="M10 11a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9v.4" stroke="#f3f0e1"/><circle cx="12" cy="17" r=".6" fill="#f3f0e1" stroke="#f3f0e1"/>',
 };
 
@@ -74,9 +90,10 @@ const ROWS = [
       note: '我們是誰、為什麼做 DiuLa!。',
       side: '本檔案記錄 DiuLa! 的起點，內容持續更新中。',
       body: [
-        // TODO：換成正式介紹
-        'DiuLa! 是一個跨平台的失物招領系統。我們想解決「東西掉了找不回來」這件小事。',
-        '失物資訊常常散落在不同的社群和平台上。DiuLa! 把它們整理在一起，讓撿到東西的人和掉東西的人更容易找到彼此。',
+        '大家好，我們是 DiuLa!，世新資傳112級畢業製作團隊。',
+        '你有沒有曾經遺失物品，花費了許多時間與心力尋找卻還是找不回來？',
+        '遺失物品是一件不便且令人焦慮的事情，然而現行協尋管道如：尋問工作人員、致電客服、報案、線上查詢、社群發文等管道各自獨立、體驗不佳，讓失主疲於在多平台間奔波；即便轉向 Threads 求助，因受限於龐雜貼文與演算法，也讓相關訊息難以曝光。',
+        'DiuLa! 以「資訊整合視覺化、AI 自動辨識標籤分類、主動媒合推播、低進入門檻」為四大設計原則，整合警政署、北捷、高鐵與 Threads 的遺失物資訊，並建立查詢、通報雙軌並行機制，打造一站式 AI 遺失物協尋平台，期望能提升每一次尋回遺失物的機率，為你帶來便捷安心的協尋體驗。',
       ],
       excerpt: [
         '每一件失物背後都有一段故事：一把陪了很久的鑰匙、一張剛辦好的學生證、一個重要的人送的小東西。',
@@ -85,7 +102,7 @@ const ROWS = [
     },
   ],
   [
-    { id: 'features', code: '02A', zh: 'DiuLa! 功能', en: '一次看懂<wbr> 9 大重點功能', color: 'blue',
+    { id: 'features', code: '02A', zh: 'DiuLa! 功能', en: '一次看懂<wbr> 10 大重點功能', color: 'blue',
       titleHTML: '<img src="images/logo.png" alt="DiuLa!"><span>功能</span>',
       wide: true,
       note: '尋找遺失物、登錄拾獲物，一個地方搞定。',
@@ -449,6 +466,7 @@ function openMemo(i) {
         <h3 id="memo-title">${p.title}</h3>
       </div>
       <div class="memo-body">${note.map((t) => `<p>${t}</p>`).join('')}</div>
+      ${p.small ? `<p class="memo-small">${p.small}</p>` : ''}
     </div>`;
   memo.showModal();
 }

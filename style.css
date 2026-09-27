@@ -377,7 +377,7 @@ button { font: inherit; }
 .point:hover, .point:focus-visible { transform: translateY(-4px); background: var(--brand-yellow); }
 .point:focus-visible { outline: 3px solid var(--brand-red); outline-offset: 3px; }
 .point::before {
-  content: "0" counter(point);
+  content: counter(point, decimal-leading-zero);
   position: absolute;
   top: 12px;
   right: 20px;
@@ -710,7 +710,7 @@ button { font: inherit; }
 
 .stage {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;   /* 色塊至少跟右側標籤一樣高，標籤才不會凸出色塊外 */
   padding-right: 5vw;
   padding-bottom: 120px;
 }
@@ -718,7 +718,6 @@ button { font: inherit; }
 .panel {
   flex: 1;
   min-width: 0;
-  min-height: 80vh;
   padding: 40px 48px 80px 22%;
   border: var(--stroke) solid var(--line);
   border-left: 0;
@@ -1172,6 +1171,11 @@ img.photo { border: var(--stroke) solid var(--line); }
   margin: 0;
   font-size: 1rem;
   line-height: 32px; /* 對齊便條紙的橫線 */
+}
+.memo-small {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
 /* ===== 動畫 ===== */
