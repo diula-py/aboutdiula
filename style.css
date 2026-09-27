@@ -238,7 +238,8 @@ button { font: inherit; }
 
 /* ===== 功能檔案：大標題、手機畫面、重點功能 ===== */
 .dossier-title img { display: block; height: 0.95em; width: auto; }
-.dossier-title img { align-self: flex-end; }
+/* 圖片的字腳對齊中文字的底線（0.09em 是量出來的差距） */
+.dossier-title img { align-self: baseline; transform: translateY(0.09em); }
 
 /* 寬版紙張：拿掉左側小字欄，內容加寬 */
 .panel.panel-wide { padding-left: 5%; }
