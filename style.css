@@ -408,7 +408,8 @@ button { font: inherit; }
 .point-title em {
   font-style: normal;
   font-family: var(--display);
-  font-size: 1.3em;
+  white-space: nowrap;  /* 放大的字不要被拆成兩行，例如「四大」 */
+  font-size: 1.2em;
   color: var(--brand-red);
 }
 .point-text p { margin: 6px 0 0; color: var(--muted); }
@@ -732,6 +733,7 @@ button { font: inherit; }
   flex-direction: column;
   gap: 8px;
   padding-top: 64px;
+  padding-bottom: 48px;   /* 讓色塊比最後一片標籤再多一點，底部才不會卡死 */
 }
 .side-tab {
   margin-left: calc(var(--stroke) * -1);
