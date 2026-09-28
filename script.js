@@ -323,7 +323,7 @@ function extraHTML(f) {
         .join('')}</ol>`;
     case 'team': {
       const card = (m) => (m.photo
-        ? `<button class="photo-btn" data-photo="${m.photo}" data-name="${m.name}｜${m.role}" aria-haspopup="dialog">
+        ? `<button class="photo-btn" data-photo="${m.photo.replace('team/', 'team/large/')}" data-name="${m.name}｜${m.role}" aria-haspopup="dialog">
              <img class="photo" src="${m.photo}" alt="${m.name}｜${m.role}" width="640" height="941" decoding="async">
            </button>`
         : `<div class="photo photo-empty" aria-hidden="true">${PHOTO_ICON}<span>照片</span></div>`);
@@ -467,10 +467,11 @@ document.addEventListener('keydown', (e) => {
 /* ----- 組員照片的大圖 ----- */
 const lightbox = document.getElementById('lightbox');
 
+// 點開看的是 images/team/large/ 裡的大圖，高解析度螢幕才不會糊
 function openPhoto(src, name) {
   lightbox.innerHTML = `
     <button class="lightbox-close" data-lightbox-close aria-label="關閉">✕</button>
-    <img src="${src}" alt="${name}">`;
+    <img src="${src}" alt="${name}" width="1280" height="1881" decoding="async">`;
   lightbox.showModal();
 }
 

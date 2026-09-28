@@ -984,7 +984,7 @@ button { font: inherit; }
 .photo-btn:focus-visible { outline: 3px solid var(--brand-red); outline-offset: 4px; }
 
 .lightbox {
-  width: min(460px, calc(100vw - 40px));
+  width: min(560px, calc(100vw - 40px), calc((100vh - 40px) * 0.68));
   max-width: none;
   max-height: calc(100vh - 40px);
   padding: 0;
