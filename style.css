@@ -951,18 +951,17 @@ button { font: inherit; }
 }
 .flow strong { font-size: 1.15rem; margin-right: 8px; }
 
-/* 指導老師：單獨一張，放在組員上方 */
-.advisor {
-  max-width: 220px;
-  margin-top: 28px;
-}
+/* 照片往左延伸到「DiuLa! 團隊名冊」那欄下方，才能放大一點（190px 欄寬 + 32px 欄距） */
+.advisor,
 .members {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  max-width: 700px;
-  margin-top: 16px;
+  gap: 20px;
+  margin-left: -222px;
 }
+/* 指導老師：單獨一張，放在組員上方 */
+.advisor { margin-top: 28px; }
+.members { margin-top: 20px; }
 /* 照片卡本身已經有姓名、職位和外框，網頁只要把圖排好 */
 .photo {
   display: block;
@@ -1286,8 +1285,10 @@ img.photo { box-shadow: 0 10px 24px rgba(73, 44, 19, 0.16); }
     scroll-snap-type: x proximity;
   }
   .sponsor { --logo-h: 80px; scroll-snap-align: start; }
-  .members { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .advisor { max-width: 180px; }
+  .advisor,
+  .members { margin-left: 0; gap: 12px; }
+  .members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .advisor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero { padding-top: 20px; }
   .hero-card { grid-template-columns: 1fr; gap: 16px; padding: 32px 22px; border-radius: 28px; }
   .hero-art { max-width: 360px; margin: 0 auto; width: 100%; }
