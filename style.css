@@ -965,8 +965,8 @@ button { font: inherit; }
 /* 組員頁的標題排到照片旁邊了，左邊那行小字改放在最上面，才不會被照片蓋住 */
 .sheet-team .side-note { margin-top: 24px; }
 .team-intro { grid-column: 2 / -1; }
-/* -0.31em 補掉字體上方的行距空間，讓「Our team」的字頂對齊照片卡上緣 */
-.team-intro .en { margin: -0.31em 0 20px; }
+/* -0.11em 補掉字體上方多出來的空間，讓「Our team」的字頂對齊照片卡上緣 */
+.team-intro .en { margin: -0.11em 0 20px; }
 .team-intro p { margin: 0 0 0.8em; font-size: 1.15rem; line-height: 1.85; }
 .members { margin-top: 20px; margin-bottom: 56px; }
 
