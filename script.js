@@ -322,7 +322,9 @@ function extraHTML(f) {
         .join('')}</ol>`;
     case 'team': {
       const card = (m) => (m.photo
-        ? `<img class="photo" src="${m.photo}" alt="${m.name}｜${m.role}">`
+        ? `<button class="photo-btn" data-photo="${m.photo}" data-name="${m.name}｜${m.role}" aria-haspopup="dialog">
+             <img class="photo" src="${m.photo}" alt="${m.name}｜${m.role}">
+           </button>`
         : `<div class="photo photo-empty" aria-hidden="true">${PHOTO_ICON}<span>照片</span></div>`);
       return `<div class="advisor">${card(ADVISOR)}</div>
         <div class="members">${TEAM.map(card).join('')}</div>`;
@@ -442,14 +444,32 @@ dossier.addEventListener('click', (e) => {
   }
   const point = e.target.closest('[data-point]');
   if (point) { openMemo(Number(point.dataset.point)); return; }
+  const photo = e.target.closest('[data-photo]');
+  if (photo) { openPhoto(photo.dataset.photo, photo.dataset.name); return; }
   const target = e.target.closest('[data-open]');
   if (target) openFile(target.dataset.open);
 });
 
 document.addEventListener('keydown', (e) => {
-  // 便條開著時，Esc 只關便條
-  if (e.key === 'Escape' && !dossier.hidden && !memo.open) closeFile();
+  // 便條或大圖開著時，Esc 只關那個小視窗
+  if (e.key === 'Escape' && !dossier.hidden && !memo.open && !lightbox.open) closeFile();
 });
+
+/* ----- 組員照片的大圖 ----- */
+const lightbox = document.getElementById('lightbox');
+
+function openPhoto(src, name) {
+  lightbox.innerHTML = `
+    <button class="lightbox-close" data-lightbox-close aria-label="關閉">✕</button>
+    <img src="${src}" alt="${name}">`;
+  lightbox.showModal();
+}
+
+lightbox.addEventListener('click', (e) => {
+  // 點大圖外面的背景，或按 ✕ 都會關閉
+  if (e.target === lightbox || e.target.closest('[data-lightbox-close]')) lightbox.close();
+});
+lightbox.addEventListener('close', () => { lightbox.innerHTML = ''; });
 
 /* ----- 重點功能的便條小視窗 ----- */
 const memo = document.getElementById('memo');
