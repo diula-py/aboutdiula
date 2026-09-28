@@ -960,8 +960,13 @@ button { font: inherit; }
   gap: 20px;
   margin-left: -206px;
 }
-/* 指導老師：單獨一張，放在組員上方 */
-.advisor { margin-top: 28px; }
+/* 指導老師：單獨一張，放在組員上方；標題和副標排在它右邊 */
+.advisor { margin-top: 64px; align-items: center; }
+/* 組員頁的標題排到照片旁邊了，左邊那行小字改放在最上面，才不會被照片蓋住 */
+.sheet-team .side-note { margin-top: 24px; }
+.team-intro { grid-column: 2 / -1; }
+.team-intro .en { margin-bottom: 20px; }
+.team-intro p { margin: 0 0 0.8em; font-size: 1.15rem; line-height: 1.85; }
 .members { margin-top: 20px; margin-bottom: 56px; }
 
 /* 照片可以點開看大圖 */
@@ -1342,7 +1347,10 @@ img.photo { box-shadow: 0 10px 24px rgba(73, 44, 19, 0.16); }
   .members { margin-bottom: 32px; }
   .lightbox-close { top: 8px; right: 8px; }
   .members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .advisor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* 手機：標題和副標回到照片上方，照片佔半排 */
+  .advisor { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
+  .team-intro { grid-column: 1 / -1; order: -1; }
+  .sheet-team .side-note { margin-top: 0; }
   .hero { padding-top: 20px; }
   .hero-card { grid-template-columns: 1fr; gap: 16px; padding: 32px 22px; border-radius: 28px; }
   .hero-art { max-width: 360px; margin: 0 auto; width: 100%; }

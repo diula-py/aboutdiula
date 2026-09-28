@@ -10,16 +10,16 @@
 const DIULA_URL = 'https://diula-py.github.io/diula-outter/#/';
 
 // 指導老師：放在組員上方
-const ADVISOR = { role: 'PROJECT ADVISOR', name: '吳林展', photo: 'images/team/advisor-wu.jpg' };
+const ADVISOR = { role: 'PROJECT ADVISOR', name: '吳林展', photo: 'images/team/advisor-wu.webp' };
 
 // 組員：照片卡上已經有姓名和職位，網頁只放照片。順序＝PM、MARKETING、DEVELOPER、VISUAL DESIGNER
 const TEAM = [
-  { role: 'PM', name: '卓筱婷', photo: 'images/team/pm-cho.jpg' },
-  { role: 'MARKETING', name: '孫于晴', photo: 'images/team/marketing-sun.jpg' },
-  { role: 'MARKETING', name: '繆宜君', photo: 'images/team/marketing-miao.jpg' },
-  { role: 'DEVELOPER', name: '王惟賢', photo: 'images/team/developer-wang.jpg' },
-  { role: 'DEVELOPER', name: '謝旻', photo: 'images/team/developer-hsieh.jpg' },
-  { role: 'VISUAL DESIGNER', name: '張祖寧', photo: 'images/team/designer-chang.jpg' },
+  { role: 'PM', name: '卓筱婷', photo: 'images/team/pm-cho.webp' },
+  { role: 'MARKETING', name: '孫于晴', photo: 'images/team/marketing-sun.webp' },
+  { role: 'MARKETING', name: '繆宜君', photo: 'images/team/marketing-miao.webp' },
+  { role: 'DEVELOPER', name: '王惟賢', photo: 'images/team/developer-wang.webp' },
+  { role: 'DEVELOPER', name: '謝旻', photo: 'images/team/developer-hsieh.webp' },
+  { role: 'VISUAL DESIGNER', name: '張祖寧', photo: 'images/team/designer-chang.webp' },
 ];
 
 // App 首頁示意圖上的四大入口
@@ -324,10 +324,17 @@ function extraHTML(f) {
     case 'team': {
       const card = (m) => (m.photo
         ? `<button class="photo-btn" data-photo="${m.photo}" data-name="${m.name}｜${m.role}" aria-haspopup="dialog">
-             <img class="photo" src="${m.photo}" alt="${m.name}｜${m.role}">
+             <img class="photo" src="${m.photo}" alt="${m.name}｜${m.role}" width="640" height="941" decoding="async">
            </button>`
         : `<div class="photo photo-empty" aria-hidden="true">${PHOTO_ICON}<span>照片</span></div>`);
-      return `<div class="advisor">${card(ADVISOR)}</div>
+      // 組員頁的標題和副標排在指導老師照片旁邊，右邊才不會空一大塊
+      return `<div class="advisor">
+          ${card(ADVISOR)}
+          <div class="team-intro">
+            <h3 class="en">${f.en}</h3>
+            ${f.body.map((p) => `<p>${p}</p>`).join('')}
+          </div>
+        </div>
         <div class="members">${TEAM.map(card).join('')}</div>`;
     }
     default:
@@ -361,13 +368,14 @@ function renderFile(f) {
 
     <div class="stage">
       <div class="panel${f.wide ? ' panel-wide' : ''}">
-        <article class="sheet${f.wide ? ' sheet-wide' : ''}">
+        <article class="sheet${f.wide ? ' sheet-wide' : ''}${f.extra === 'team' ? ' sheet-team' : ''}">
           <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
           <span class="stamp">檔案 №${f.code}</span>
           <p class="side-note">${f.side}</p>
           <div class="sheet-main">
-            <h3 class="en${f.icon ? ' en-icon' : ''}">${heading}</h3>
-            ${f.body.map((p) => `<p>${p}</p>`).join('')}
+            ${f.extra === 'team' ? '' : `
+              <h3 class="en${f.icon ? ' en-icon' : ''}">${heading}</h3>
+              ${f.body.map((p) => `<p>${p}</p>`).join('')}`}
             ${extraHTML(f)}
           </div>
           <span class="barcode" aria-hidden="true">DIULA${f.code}0917LF2026</span>
@@ -511,3 +519,8 @@ document.querySelectorAll('.js-diula-link').forEach((link) => {
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// 先在背景把組員照片載好，點開檔案時才不用等
+const preloadPhotos = () => [ADVISOR, ...TEAM].forEach((m) => { if (m.photo) new Image().src = m.photo; });
+if ('requestIdleCallback' in window) requestIdleCallback(preloadPhotos);
+else setTimeout(preloadPhotos, 1500);
