@@ -16,12 +16,17 @@ CREAM = (243, 240, 225)   # --brand-bg  #f3f0e1
 BLUE = (205, 220, 240)    # --brand-blue #cddcf0
 BROWN = (73, 44, 19)      # --brand-brown #492c13
 YELLOW = (252, 230, 183)  # --brand-yellow #fce6b7
+NAVY = (31, 47, 79)       # --brand-navy #1f2f4f
 
 # 圖檔裡的顏色 → 要換成的品牌色；容許誤差內的近似色也一起換
-SNAP = [((255, 255, 255), CREAM), ((203, 217, 236), BLUE), ((72, 43, 18), BROWN), ((248, 226, 182), YELLOW)]
+SNAP = [((255, 255, 255), CREAM), ((203, 217, 236), BLUE), ((72, 43, 18), BROWN), ((248, 226, 182), YELLOW),
+        ((30, 48, 80), NAVY)]
 TOLERANCE = 10
 
-FILES = ["咖啡色放大鏡", "雨傘＿遺失物", "鑰匙＿遺失物", "紅綠燈", "星星", "DiuLa! logo去背2"]
+FILES = ["咖啡色放大鏡", "雨傘＿遺失物", "鑰匙＿遺失物", "紅綠燈", "星星", "DiuLa! logo去背2", "threads-brands-solid"]
+
+# 這些圖案中間本來就要透空（例如 Threads logo 的圈圈），不要把破洞填成米白
+KEEP_HOLES = {"threads-brands-solid"}
 
 
 def fill_holes(px, w, h):
@@ -71,7 +76,8 @@ for name in FILES:
     im = Image.open(path).convert("RGBA")
     w, h = im.size
     px = im.load()
-    fill_holes(px, w, h)
+    if name not in KEEP_HOLES:
+        fill_holes(px, w, h)
     snap_colors(px, w, h)
     im.save(path)
     print(f"{path.name} 已校正")

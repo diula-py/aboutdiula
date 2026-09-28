@@ -79,7 +79,6 @@ const ICONS = {
   home: '<path d="M3 11 12 3l9 8v10h-6.5v-6h-5v6H3z" fill="currentColor"/>',
   user: '<circle cx="12" cy="8" r="4.5" fill="currentColor"/><path d="M3 21.5a9 7.5 0 0 1 18 0z" fill="currentColor"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
-  threads: '<path d="M15.5 12.2c0-2.3-1.4-3.6-3.3-3.6-1.9 0-3.2 1.3-3.2 3.1 0 1.7 1.2 2.9 2.9 2.9 2.4 0 3.6-1.9 3.6-4.6 0-4-2.6-6-5.8-6C6.3 4 4 6.9 4 12s2.4 8 6.2 8c2.6 0 4.2-.9 5.3-2.3"/><path d="M15.5 12.2c0 3 1.1 4.1 2.3 4.1 1.3 0 2.2-1.4 2.2-4.3"/>',
   idcard: '<rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="currentColor"/><circle cx="8.5" cy="10.5" r="2" fill="#f3f0e1" stroke="none"/><path d="M5.5 16c.6-1.8 5.4-1.8 6 0" stroke="#f3f0e1"/><path d="M14 10h4.5M14 14h3" stroke="#f3f0e1"/>',
   mycase: '<rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/>',
   item: '<rect x="5" y="4" width="14" height="17" rx="2.5" fill="currentColor"/><rect x="9" y="2.5" width="6" height="3.5" rx="1" fill="currentColor"/><path d="M10 11a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9v.4" stroke="#f3f0e1"/><circle cx="12" cy="17" r=".6" fill="#f3f0e1" stroke="#f3f0e1"/>',
@@ -194,8 +193,10 @@ const paperVars = (f) =>
 
 const PHOTO_ICON = '<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6l1.5-2h4l1.5 2"/></svg>';
 
-const icon = (name) =>
-  `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
+// Threads 用官方 logo 圖檔，其他圖示是上面畫的線稿
+const icon = (name) => (name === 'threads'
+  ? `<img class="icon icon-img" src="icon/threads-brands-solid.png" alt="" aria-hidden="true">`
+  : `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`);
 
 const tabHTML = (f, kind) => `
   <button class="tab tab-${kind}" style="${colorVars(f)}" data-open="${f.id}" aria-label="打開檔案：${f.zh}">

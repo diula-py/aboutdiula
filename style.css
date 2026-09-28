@@ -1053,6 +1053,7 @@ img.photo { box-shadow: 0 10px 24px rgba(73, 44, 19, 0.16); }
   stroke-linejoin: round;
   color: var(--brand-navy);
 }
+.icon-img { object-fit: contain; }
 .en-icon { display: flex; align-items: center; gap: 16px; font-family: var(--sans); font-size: clamp(1.8rem, 4vw, 2.8rem); }
 .en-icon .icon { width: 1.1em; height: 1.1em; }
 .sheet-main .more-link { margin: 28px 0 0; }
