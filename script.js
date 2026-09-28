@@ -9,14 +9,17 @@
 // TODO：DiuLa! 的網址；還沒有的話留空，按鈕會顯示「即將上線」
 const DIULA_URL = 'https://diula-py.github.io/diula-outter/#/';
 
-// 組員：照片放進 images/team/，再把檔名填到 photo，例如 photo: 'images/team/卓筱婷.jpg'
+// 指導老師：放在組員上方
+const ADVISOR = { role: 'PROJECT ADVISOR', name: '吳林展', photo: 'images/team/advisor-wu.jpg' };
+
+// 組員：照片卡上已經有姓名和職位，網頁只放照片。順序＝PM、MARKETING、DEVELOPER、VISUAL DESIGNER
 const TEAM = [
-  { role: 'PM', name: '卓筱婷', photo: '' },
-  { role: 'MARKETING', name: '孫于晴', photo: '' },
-  { role: 'MARKETING', name: '繆宜君', photo: '' },
-  { role: 'VISUAL DESIGNER', name: '張祖寧', photo: '' },
-  { role: 'DEVELOPER', name: '王惟賢', photo: '' },
-  { role: 'DEVELOPER', name: '謝旻', photo: '' },
+  { role: 'PM', name: '卓筱婷', photo: 'images/team/pm-cho.jpg' },
+  { role: 'MARKETING', name: '孫于晴', photo: 'images/team/marketing-sun.jpg' },
+  { role: 'MARKETING', name: '繆宜君', photo: 'images/team/marketing-miao.jpg' },
+  { role: 'DEVELOPER', name: '王惟賢', photo: 'images/team/developer-wang.jpg' },
+  { role: 'DEVELOPER', name: '謝旻', photo: 'images/team/developer-hsieh.jpg' },
+  { role: 'VISUAL DESIGNER', name: '張祖寧', photo: 'images/team/designer-chang.jpg' },
 ];
 
 // App 首頁示意圖上的四大入口
@@ -317,15 +320,13 @@ function extraHTML(f) {
       return `<ol class="flow">${f.steps
         .map(([title, desc]) => `<li><span><strong>${title}</strong>${desc}</span></li>`)
         .join('')}</ol>`;
-    case 'team':
-      return `<div class="members">${TEAM.map((m) => `
-        <div class="member-card">
-          ${m.photo
-            ? `<img class="photo" src="${m.photo}" alt="${m.name}">`
-            : `<div class="photo photo-empty" aria-hidden="true">${PHOTO_ICON}<span>照片</span></div>`}
-          <p class="role">${m.role}</p>
-          <h4>${m.name}</h4>
-        </div>`).join('')}</div>`;
+    case 'team': {
+      const card = (m) => (m.photo
+        ? `<img class="photo" src="${m.photo}" alt="${m.name}｜${m.role}">`
+        : `<div class="photo photo-empty" aria-hidden="true">${PHOTO_ICON}<span>照片</span></div>`);
+      return `<div class="advisor">${card(ADVISOR)}</div>
+        <div class="members">${TEAM.map(card).join('')}</div>`;
+    }
     default:
       return '';
   }
