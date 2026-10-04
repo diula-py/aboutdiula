@@ -372,7 +372,7 @@ function renderFile(f) {
       <div class="panel${f.wide ? ' panel-wide' : ''}">
         <article class="sheet${f.wide ? ' sheet-wide' : ''}${f.extra === 'team' ? ' sheet-team' : ''}">
           <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
-          <span class="stamp">檔案 №${f.code}</span>
+          <span class="stamp">檔案 N${f.code}</span>
           <p class="side-note">${f.side}</p>
           <div class="sheet-main">
             ${f.extra === 'team' ? '' : `
@@ -390,7 +390,7 @@ function renderFile(f) {
             <div class="slip">
               <h4>LOST&amp;FOUND</h4>
               <dl>
-                <div><dt>檔案編號</dt><dd>№${f.code}</dd></div>
+                <div><dt>檔案編號</dt><dd>N${f.code}</dd></div>
                 <div><dt>分類</dt><dd>${(f.group || f).zh}</dd></div>
                 <div><dt>收件</dt><dd>DiuLa! 團隊</dd></div>
                 <div><dt>狀態</dt><dd>已歸檔</dd></div>
