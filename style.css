@@ -851,10 +851,9 @@ button { font: inherit; }
   white-space: nowrap; /* 不換行，改用字級縮放塞進剩下的寬度 */
   font-size: clamp(1.1rem, calc((100cqi - 280px) / 10.5), 2.8rem);
 }
+/* 訪談引言維持一段，不要分成兩欄 */
 .columns {
   max-width: calc(100% - 280px);
-  column-count: 2;
-  column-gap: 36px;
 }
 .columns p { margin: 0 0 0.8em; font-size: 1rem; }
 
@@ -1301,7 +1300,7 @@ img.photo { box-shadow: 0 10px 24px rgba(73, 44, 19, 0.16); }
 
   .sheet-2 { margin-right: 0; padding: 72px 20px 36px; }
   .sheet-2 > .en { max-width: none; font-size: clamp(1.1rem, calc(100cqi / 10.5), 2.8rem); }
-  .columns { max-width: none; column-count: 1; }
+  .columns { max-width: none; }
   .slip-wrap {
     position: relative;
     top: auto;
