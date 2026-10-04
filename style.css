@@ -1126,6 +1126,12 @@ img.photo { box-shadow: 0 10px 24px rgba(73, 44, 19, 0.16); }
   font-size: 0.85rem;
 }
 
+.file-cta {
+  margin: 40px 0 0;
+  text-align: center;
+}
+.file-cta .pill { display: inline-block; padding: 12px 28px; font-size: 1.05rem; }
+
 /* ===== 重點功能的便條小視窗 ===== */
 .memo {
   width: min(440px, calc(100vw - 40px));

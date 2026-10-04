@@ -317,7 +317,8 @@ const pointsHTML = () => `<ol class="points">${POINTS.map((p, i) => `
 function extraHTML(f) {
   switch (f.extra) {
     case 'features':
-      return screensHTML() + pointsHTML();
+      return screensHTML() + pointsHTML() +
+        `<p class="file-cta"><a class="pill pill-dark js-diula-link" target="_blank" rel="noopener">前往 DiuLa! →</a></p>`;
     case 'flow':
       return `<ol class="flow">${f.steps
         .map(([title, desc]) => `<li><span><strong>${title}</strong>${desc}</span></li>`)
@@ -405,6 +406,8 @@ function renderFile(f) {
         ${others.map((x, i) => `<button class="side-tab" style="${colorVars(x)} --i: ${i};" data-open="${x.id}">${x.zh}</button>`).join('')}
       </nav>
     </div>`;
+
+  setDiulaLinks(dossier);
 }
 
 function showFile(id) {
@@ -509,16 +512,19 @@ memo.addEventListener('click', (e) => {
 });
 memo.addEventListener('close', () => { memo.innerHTML = ''; });
 
-// 「前往 DiuLa!」按鈕
-document.querySelectorAll('.js-diula-link').forEach((link) => {
-  if (DIULA_URL) {
-    link.href = DIULA_URL;
-  } else {
-    link.textContent = 'DiuLa! 即將上線';
-    link.classList.add('is-soon');
-    link.setAttribute('aria-disabled', 'true');
-  }
-});
+// 「前往 DiuLa!」按鈕（檔案頁是後來才產生的，所以做成函式，渲染完再套一次）
+function setDiulaLinks(root = document) {
+  root.querySelectorAll('.js-diula-link').forEach((link) => {
+    if (DIULA_URL) {
+      link.href = DIULA_URL;
+    } else {
+      link.textContent = 'DiuLa! 即將上線';
+      link.classList.add('is-soon');
+      link.setAttribute('aria-disabled', 'true');
+    }
+  });
+}
+setDiulaLinks();
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
