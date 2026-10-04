@@ -61,8 +61,8 @@ const POINTS = [
 // 其他畫面把截圖放進 images/screens/，再填到 src，例如 src: 'images/screens/ai.png'
 const SCREENS = [
   { src: 'images/screens/cross-search.png', caption: '跨平台尋找遺失物' },
-  { src: 'images/screens/match-result.png', caption: '比對結果', main: true },
-  { src: 'images/screens/home.png', caption: '首頁' },
+  { src: 'images/screens/home.png', caption: '首頁', main: true },
+  { src: 'images/screens/match-result.png', caption: '比對結果' },
 ];
 
 // App 使用的圖示
@@ -306,7 +306,6 @@ const screensHTML = () => `<div class="screens">${SCREENS.map((sc) => `
 const pointsHTML = () => `<ol class="points">${POINTS.map((p, i) => `
   <li>
     <button class="point" data-point="${i}" aria-haspopup="dialog">
-      <span class="point-icon">${icon(p.icon)}</span>
       <span class="point-text">
         <span class="point-title">${p.title}</span>
         ${p.desc ? `<p>${p.desc}</p>` : ''}
