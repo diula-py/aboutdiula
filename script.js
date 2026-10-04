@@ -60,9 +60,9 @@ const POINTS = [
 // 功能畫面：mock: 'home' 是用網頁重現的 App 首頁；
 // 其他畫面把截圖放進 images/screens/，再填到 src，例如 src: 'images/screens/ai.png'
 const SCREENS = [
-  { src: '', caption: 'AI 自動分類' },
-  { mock: 'home', caption: 'App 首頁', main: true },
-  { src: '', caption: '圖文卡片' },
+  { src: 'images/screens/cross-search.png', caption: '跨平台尋找遺失物' },
+  { src: 'images/screens/match-result.png', caption: '比對結果', main: true },
+  { src: 'images/screens/home.png', caption: '首頁' },
 ];
 
 // App 使用的圖示
