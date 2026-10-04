@@ -1126,7 +1126,8 @@ img.photo { box-shadow: 0 10px 24px rgba(73, 44, 19, 0.16); }
   font-size: 0.85rem;
 }
 
-.file-cta {
+.sheet-main > .file-cta {
+  max-width: none; /* 不要套用 .sheet-main > p 的 34em 上限，才會對整個區塊置中 */
   margin: 40px 0 0;
   text-align: center;
 }
