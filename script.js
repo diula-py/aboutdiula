@@ -7,7 +7,7 @@
    ========================================================= */
 
 // TODO：DiuLa! 的網址；還沒有的話留空，按鈕會顯示「即將上線」
-const DIULA_URL = 'https://diula-py.github.io/diula-outter/#/';
+const DIULA_URL = 'https://diula.co/';
 
 // 指導老師：放在組員上方
 const ADVISOR = { role: 'PROJECT ADVISOR', name: '吳林展', photo: 'images/team/advisor-wu.webp' };
