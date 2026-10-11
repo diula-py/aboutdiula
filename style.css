@@ -260,7 +260,7 @@ button { font: inherit; }
 .screen-item.is-main { width: min(290px, 32cqw); }
 .screen-item figcaption { margin-top: 14px; font-weight: 700; }
 .phone {
-  aspect-ratio: 337 / 726; /* 跟 App 截圖一樣的比例 */
+  aspect-ratio: 393 / 852; /* 跟 App 截圖一樣的比例 */
   padding: 8px;
   border-radius: 36px;
   background: var(--brand-brown);
@@ -863,6 +863,8 @@ button { font: inherit; }
   max-width: calc(100% - 280px);
 }
 .columns p { margin: 0 0 0.8em; font-size: 1rem; }
+/* 引言下方的受訪者 */
+.quote-by { margin-top: 14px; font-weight: 700; }
 
 /* 失物登記單 */
 .slip-wrap {
