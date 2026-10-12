@@ -60,9 +60,9 @@ const POINTS = [
 // 功能畫面：mock: 'home' 是用網頁重現的 App 首頁；
 // 其他畫面把截圖放進 images/screens/，再填到 src，例如 src: 'images/screens/ai.png'
 const SCREENS = [
-  { src: 'images/screens/cross-search.png', caption: '跨平台尋找遺失物' },
-  { src: 'images/screens/home.png', caption: '首頁', main: true },
-  { src: 'images/screens/match-result.png', caption: '比對結果' },
+  { src: 'images/screens/cross-search.webp', caption: '跨平台尋找遺失物' },
+  { src: 'images/screens/home.webp', caption: '首頁', main: true },
+  { src: 'images/screens/match-result.webp', caption: '比對結果' },
 ];
 
 // App 使用的圖示
@@ -159,7 +159,7 @@ const ROWS = [
     { id: 'team', code: '04A', zh: '組員介紹', en: 'Our team', color: 'navy',
       note: '一起把 DiuLa! 做出來的組員們。',
       side: 'DiuLa! 團隊名冊。',
-      body: ['每個人負責不同的部分，一起把 DiuLa! 做出來。'],
+      body: ['我們各司其職，只為縮短你與失物的距離。'],
       excerpt: ['等待的過程很焦慮，因為你不知道到底這個東西是找的回來還是找不回來'],
       source: '受訪者C',
       extra: 'team' },
@@ -305,7 +305,7 @@ const screensHTML = () => `<div class="screens">${SCREENS.map((sc) => `
   <figure class="screen-item${sc.main ? ' is-main' : ''}">
     <div class="phone">
       ${sc.mock === 'home' ? homeMock()
-        : sc.src ? `<img class="screen" src="${sc.src}" alt="${sc.caption}">`
+        : sc.src ? `<img class="screen" src="${sc.src}" alt="${sc.caption}" width="640" height="1387" decoding="async">`
         : emptyScreen()}
     </div>
     <figcaption>${sc.caption}</figcaption>
@@ -540,6 +540,9 @@ setDiulaLinks();
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // 先在背景把組員照片載好，點開檔案時才不用等
-const preloadPhotos = () => [ADVISOR, ...TEAM].forEach((m) => { if (m.photo) new Image().src = m.photo; });
+const preloadPhotos = () => {
+  [ADVISOR, ...TEAM].forEach((m) => { if (m.photo) new Image().src = m.photo; });
+  SCREENS.forEach((sc) => { if (sc.src) new Image().src = sc.src; });
+};
 if ('requestIdleCallback' in window) requestIdleCallback(preloadPhotos);
 else setTimeout(preloadPhotos, 1500);
